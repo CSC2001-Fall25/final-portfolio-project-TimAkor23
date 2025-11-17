@@ -23,6 +23,16 @@
   <section class="api">
     <h2>API Demo</h2>
     <p id="quote">Loading a quote via fetch()…</p>
+    <script>
+    document.getElementById("load").addEventListener("click", ()=>{
+			fetch("https://official-joke-api.appspot.com/random_joke")
+			.then(res=> res.json())
+			.then(data => {
+				document.getElementById("joke").textContent =
+				`${data.setup} - ${data.punchline}`;
+			});
+		});
+    </script>
   </section>
 
   <script src="script.js"></script>
