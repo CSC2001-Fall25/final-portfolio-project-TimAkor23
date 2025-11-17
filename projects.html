@@ -23,7 +23,109 @@
     <article class="card">
       <h3>Alien Ship</h3>
       <p>Python Project that takes a alien ships and moves it along a sin-wave path.</p>
+      <pre><code>
+
+import sys
+import os
+import math
+import time
+
+try:
+    import turtle
+except ImportError as e:
+    print(f"Error importing turtle: {e}")
+
+def create_alien_shape(): #Creates the shape of 
+    alienshape_points = [
+        (-40, -50), 
+        (-40, 150),    
+        (40, 200),   
+        (30, 0),   
+        (50, 0),     
+        (100, -100),   
+        (30, -100),  
+        (30, -150),   
+        (20, -30),   
+        (20, -20),   
+        (-20, -20),  
+        (-20, -150), 
+        (-30, -100),  
+        (-30, -50)   
+    ]
+    return alienshape_points
+
+def register_shape(shape_name, points):
+    screen = turtle.Screen()
+    screen.register_shape(shape_name, turtle.Shape("polygon", points))
+
+def animate_alien(): #Creates the screen and defines the color 
+    screen = turtle.Screen()
+    screen.setup(800, 600)
+    screen.bgcolor("red")
+    screen.title("Alien Ship - Sine Wave Motion")
+    screen.tracer(0)  
+    
+    # Create and register the car shape
+    shape_points = create_alien_shape()
+    register_shape("car", shape_points)
+    
+    # Create the turtle object with our custom shape
+    alien = turtle.Turtle()
+    alien.shape("car")
+    alien.color("blue")
+    alien.penup()
+    
+    # Draw a path line
+    path_drawer = turtle.Turtle()
+    path_drawer.penup()
+    path_drawer.goto(-400, 0)
+    path_drawer.pendown()
+    path_drawer.pencolor("gray")
+    path_drawer.width(1)
+    path_drawer.forward(800)
+    path_drawer.hideturtle()
+    
+    # Set initial position
+    start_x = -300
+    start_y = 0
+    alien.goto(start_x, start_y)
+    alien.showturtle()
+    
+    # Animation parameters
+    amplitude = 150  # Height of the sine wave
+    frequency = 0.05  # How quickly the sine wave oscillates
+    speed = 2  # Horizontal movement speed
+    
+    # Animation loop
+    start_time = time.time()
+    duration = 15  # Run for 15 seconds
+    
+    while time.time() - start_time < duration:
+        # Calculate current position in the sine wave
+        x = alien.xcor()
+        y = amplitude * math.sin(frequency * x)
+        
+        # Update position
+        alien.goto(x + speed, y)
+        
+        # Keep the ship within screen 
+        if x > 380:
+            alien.goto(-380, y)
+        
+        # Update the screen
+        screen.update()
+        time.sleep(0.01)
+    
+    # Clean up
+    alien.hideturtle()
+    input()
+
+if __name__ == "__main__":
+    animate_alien()
       <p><a href="#" target="_blank" rel="noopener">Live</a> · <a href="#" target="_blank" rel="noopener">Code</a></p>
+      </code></pre>
+
+
     </article>
     
   </main>
