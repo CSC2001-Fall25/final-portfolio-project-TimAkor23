@@ -15,26 +15,26 @@
   </nav>
 
   <header class="hero">
-  <img src="C:\Users\takor\OneDrive\Pictures\Headshot.JPG" alt=" Headshot.jpg" style="width:300px; height:200px; title="Me">
+    <img src="images/Headshot.JPG" alt="Timothy Akor" class="headshot">
     <h1>Hello, I’m <span id="studentName">Timothy Akor</span></h1>
     <p class="tagline">Web Design & Development Student</p>
   </header>
 
   <section class="api">
     <h2>API Demo</h2>
-    <p id="quote">Loading a quote via fetch()…</p>
-    <script>
-    document.getElementById("load").addEventListener("click", ()=>{
-			fetch("https://official-joke-api.appspot.com/random_joke")
-			.then(res=> res.json())
-			.then(data => {
-				document.getElementById("joke").textContent =
-				`${data.setup} - ${data.punchline}`;
-			});
-		});
-    </script>
+    <button id="load">Get a Joke</button>
+    <p id="joke">Click the button to load a joke!</p>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    document.getElementById("load").addEventListener("click", () => {
+      fetch("https://official-joke-api.appspot.com/random_joke")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("joke").textContent =
+            `${data.setup} — ${data.punchline}`;
+        });
+    });
+  </script>
 </body>
 </html>
